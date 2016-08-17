@@ -12,13 +12,13 @@ class SpeakCommand extends Command
 
     $this->setName('speak') // ./demo speak
          ->setDescription('Speak a message.')
-         ->addArgument('message', InputArgument::REQUIRED, 'What message should I speak?');
+         ->addArgument('message', InputArgument::OPTIONAL, 'What message should I speak?', 'hello how are you');
 
   }
 
   protected function execute(InputInterface $input, OutputInterface $output){
 
-    exec('espeak '.$input->getArgument('message'));
+    exec('espeak "'.$input->getArgument('message').'"');
 
   }
 
