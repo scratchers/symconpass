@@ -8,5 +8,6 @@ use Symfony\Component\Console\Application;
 $app = new Application('Foobar',1.0);
 
 $app->add(new SpeakCommand);
+$app->add(new Password);
 
 $app->run();
