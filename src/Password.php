@@ -12,7 +12,6 @@ class Password extends Command {
 		$this->setName('password') // ./demo speak
 			->setDescription('Get/Set a Password.');
 // 			->addArgument('password', InputArgument::OPTIONAL, 'What message should I speak?');
-
 	}
 
 	public function execute(InputInterface $input, OutputInterface $output){
@@ -22,6 +21,16 @@ class Password extends Command {
 		$question->setHiddenFallback(false);
 
 		$password = $helper->ask($input, $output, $question);
-		$output->writeln("Your password is: <options=reverse>$password</>");
+
+		$formatter = $this->getHelper('formatter');
+		$formattedLine = $formatter->formatSection(
+			'Password',
+			"Your password is: <options=reverse>$password</>"
+		);
+		$output->writeln($formattedLine);
+
+		$errorMessages = array('Error!', 'Something went wrong');
+		$formattedBlock = $formatter->formatBlock($errorMessages, 'error');
+		$output->writeln($formattedBlock);
 	}
 }
